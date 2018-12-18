@@ -1,9 +1,9 @@
 import unittest
-from CTCI_Ch2_Ex3 import *
+from CTCI.Ch2_Linked_Lists.exercises.CTCI_Ch2_Ex3 import KthLastSinglyLinkedList, Empty
 
-class TestKthLast(unittest.TestCase):
+class TestKthLastSinglyLinkedList(unittest.TestCase):
     def setUp(self):
-        self.sll = SinglyLinkedList()
+        self.sll = KthLastSinglyLinkedList()
 
     def tearDown(self):
         self.sll = None
@@ -43,6 +43,3 @@ class TestKthLast(unittest.TestCase):
 
         self.assertIsNone(self.sll.kth_to_last_r(11))
 
-
-if __name__ == '__main__':
-    unittest.main()

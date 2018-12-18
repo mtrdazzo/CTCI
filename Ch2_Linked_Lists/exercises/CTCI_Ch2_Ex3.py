@@ -18,56 +18,10 @@
         find_kth_node_r Recursive solution to finding the kth node of the singly linked list
 
 """
+from CTCI.Ch2_Linked_Lists.common.SinglyLinkedList import SinglyLinkedList, Empty
 
-class Empty(Exception):
-    """Empty Singly Linked List Exception"""
-    pass
 
-class SinglyLinkedList:
-    """Singly linked list"""
-
-    class _Node:
-        """Lightweight non-public node structure"""
-        __slots__ = 'data', 'next'
-        def __init__(self, data):
-            """Create a new node with reference to data"""
-            self.data = data
-            self.next = None
-
-    def __init__(self):
-        """Create an empty singly linked list"""
-        self.head = None
-        self.tail = None
-        self.size = 0
-
-    def __len__(self):
-        """Return the number of element in the linked list"""
-        return self.size
-
-    def __str__(self):
-        """Print the linked list EX. 1->2->3"""
-        if self.is_empty():
-            return ""
-        curr = self.head
-        s = str(curr.data)
-        while curr.next is not None:
-            curr = curr.next
-            s += "->" + str(curr.data)
-        return s
-
-    def is_empty(self):
-        """Return True if the linked list contains no elements"""
-        return len(self) == 0
-
-    def add(self, e):
-        """Add a node to the end of the linked list"""
-        new = self._Node(e)
-        if self.is_empty():
-            self.head = new
-        else:
-            self.tail.next = new
-        self.tail = new
-        self.size += 1
+class KthLastSinglyLinkedList(SinglyLinkedList):
 
     def kth_to_last(self, k):
         """Iterative solution to return the kth to last node in the linked list"""
@@ -78,9 +32,9 @@ class SinglyLinkedList:
             raise ValueError("Index must be > 0")
 
         #Runner technique
-        slow = fast = self.head
-        while fast.next is not None and k > 1:
-            fast = fast.next
+        slow = fast = self._head
+        while fast._next is not None and k > 1:
+            fast = fast._next
             k -= 1
 
         #Not enough elements
@@ -88,11 +42,11 @@ class SinglyLinkedList:
             return None
 
         #Traverse to the end of the linked list
-        while fast.next is not None:
-            fast = fast.next
-            slow = slow.next
+        while fast._next is not None:
+            fast = fast._next
+            slow = slow._next
 
-        return slow.data
+        return slow._data
 
     def kth_to_last_r(self, k):
         """Recursive solution to return the kth to last node """
@@ -106,16 +60,14 @@ class SinglyLinkedList:
         def kth_to_last_helper(node, k):
             if node is None:
                 return 1
-            n = kth_to_last_helper(node.next, k)
+            n = kth_to_last_helper(node._next, k)
 
             if k > n:
                 return 1 + n
             elif k == n and self.kth_node is None:
-                self.kth_node = node.data
+                self.kth_node = node._data
             return n
 
-        kth_to_last_helper(self.head, k)
+        kth_to_last_helper(self._head, k)
 
         return self.kth_node
-
-
