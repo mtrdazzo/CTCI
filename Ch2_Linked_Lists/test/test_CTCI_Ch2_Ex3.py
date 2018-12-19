@@ -1,45 +1,42 @@
-import unittest
-from CTCI.Ch2_Linked_Lists.exercises.CTCI_Ch2_Ex3 import KthLastSinglyLinkedList, Empty
+from unittest import TestCase
+from CTCI.Ch2_Linked_Lists.common.SinglyLinkedList import Node, Empty
+from CTCI.Ch2_Linked_Lists.exercises.CTCI_Ch2_Ex3 import delete_middle_node
 
-class TestKthLastSinglyLinkedList(unittest.TestCase):
+
+class TestDeleteMiddleNode(TestCase):
+
     def setUp(self):
-        self.sll = KthLastSinglyLinkedList()
+        pass
 
     def tearDown(self):
-        self.sll = None
+        pass
 
-    def test_empty_list(self):
+    def test_empty_node(self):
+        """Delete node in empty linked list, raise Empty"""
         with self.assertRaises(Empty):
-            self.sll.kth_to_last(1)
+            delete_middle_node(None)
 
-        with self.assertRaises(Empty):
-            self.sll.kth_to_last_r(1)
+    def test_single_node(self):
+        """Delete node with one element in linked list, raise IndexError"""
+        node = Node(1)
 
-    def test_single_element(self):
-        self.sll.add(1)
-        self.assertTrue(self.sll.kth_to_last(1) == 1)
+        with self.assertRaises(IndexError):
+            delete_middle_node(node)
 
-        with self.assertRaises(ValueError):
-            self.sll.kth_to_last(0)
+    def test_two_nodes(self):
+        """Deletes head node in linked list with two elements"""
+        node = Node(1)
+        node.next = Node(2)
 
-        self.assertIsNone(self.sll.kth_to_last(2))
+        delete_middle_node(node)
+        self.assertIsNone(node.next)
+        self.assertTrue(node.data == 2)
 
-    def test_multiple_elements(self):
-        for i in range(10):
-            self.sll.add(i)
-            self.assertTrue(self.sll.kth_to_last(1) == i)
+    def test_more_two_nodes(self):
+        """Delete middle node in linked list of length > two elements"""
+        node = Node(1)
+        node.next = Node(3)
+        node.next.next = Node(4)
 
-        for i in range(1, 10):
-            self.assertTrue(len(self.sll) - self.sll.kth_to_last(i) == i)
-
-        self.assertIsNone(self.sll.kth_to_last(11))
-
-    def test_recursive_kth(self):
-        for i in range(10):
-            self.sll.add(i)
-
-        for i in range(1, 10):
-            self.assertTrue(len(self.sll) - self.sll.kth_to_last_r(i) == i)
-
-        self.assertIsNone(self.sll.kth_to_last_r(11))
-
+        delete_middle_node(node.next)
+        self.assertTrue(node.next.data == 4)
