@@ -1,73 +1,44 @@
 #!/usr/bin/env python
 """
-    File name: CTCI_Ch2_Ex3.py
-    Author: Matt Randazzo
-    Date created: 12/14/2018
-    Date last modified: 12/14/2018
-    Python Version: 3.7
+    File name:          CTCI_Ch2_Ex3.py
+    Author:             Matt Randazzo
+    Date created:       12/19/2018
+    Date last modified: 12/19/2018
+    Python Version:     3.7
 
-    Description: CTCI 2.2 Return Kth to Last
-                 Implement an algorithm to find the kth to last element of a singly
-                 linked list.
-    Classes:
-        Empty               Singly linked list empty exception
-        Singly Linked List  Singly linked list ADT
+    Description: CTCI 2.3 Delete Middle Node
+                 Implement an algorithm to delete a node in the middle (i.e., any node but
+                 the first and last node, not necessarily the exact middle) of a singly
+                 linked list, given only access to that node.
+
+    Classes: None
 
     Functions:
-        find_kth_node   Iterative solution to find the kth node of the sinly linked list
-        find_kth_node_r Recursive solution to finding the kth node of the singly linked list
+
+        delete_middle_node Delete node in linked list that is not the head or tail
 
 """
-from CTCI.Ch2_Linked_Lists.common.SinglyLinkedList import SinglyLinkedList, Empty
+from CTCI.Ch2_Linked_Lists.common.SinglyLinkedList import Empty
 
 
-class KthLastSinglyLinkedList(SinglyLinkedList):
+def delete_middle_node(node):
+    """Delete middle node from singly linked list
 
-    def kth_to_last(self, k):
-        """Iterative solution to return the kth to last node in the linked list"""
-        #Do nothing
-        if self.is_empty():
-            raise Empty("List is empty")
-        if k < 1:
-            raise ValueError("Index must be > 0")
+    \param node node to be deleted
 
-        #Runner technique
-        slow = fast = self._head
-        while fast._next is not None and k > 1:
-            fast = fast._next
-            k -= 1
+    """
+    # Empty node
+    if node is None:
+        raise Empty("Node is empty")
 
-        #Not enough elements
-        if k > 1:
-            return None
+    # Not a middle node
+    elif node.next is None:
+        raise IndexError("Not middle node")
 
-        #Traverse to the end of the linked list
-        while fast._next is not None:
-            fast = fast._next
-            slow = slow._next
+    # Copy contents of next node to current node
+    tmp = node.next
+    node.next = tmp.next
+    node.data = tmp.data
 
-        return slow._data
-
-    def kth_to_last_r(self, k):
-        """Recursive solution to return the kth to last node """
-        self.kth_node = None
-
-        if self.is_empty():
-            raise Empty("List is empty")
-        elif k < 1:
-            raise ValueError("Index must > 0")
-
-        def kth_to_last_helper(node, k):
-            if node is None:
-                return 1
-            n = kth_to_last_helper(node._next, k)
-
-            if k > n:
-                return 1 + n
-            elif k == n and self.kth_node is None:
-                self.kth_node = node._data
-            return n
-
-        kth_to_last_helper(self._head, k)
-
-        return self.kth_node
+    # Delete the next node
+    tmp.data = tmp.next = None
