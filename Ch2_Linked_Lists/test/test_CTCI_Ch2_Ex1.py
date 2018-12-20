@@ -2,6 +2,7 @@ from unittest import TestCase
 from CTCI.Ch2_Linked_Lists.common.SinglyLinkedList import Empty
 from CTCI.Ch2_Linked_Lists.exercises.CTCI_Ch2_Ex1 import RemoveDupsSinglyLinkedList
 
+
 class TestRemoveDupsSinglyLinkedList(TestCase):
 
     def setUp(self):
