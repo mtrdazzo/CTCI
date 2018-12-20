@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 """
-    File name: CTCI_Ch2_Ex1.py
-    Author: Matt Randazzo
-    Date created: 12/15/2018
+    File name:          CTCI_Ch2_Ex1.py
+    Author:             Matt Randazzo
+    Date created:       12/15/2018
     Date last modified: 12/20/2018
-    Python Version: 3.7
+    Python Version:     3.7
 
     Description: CTCI 2.1 Remove Dups
                  Write code to remove duplicates from an unsorted linked list.

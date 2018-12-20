@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 """
-    File name: CTCI_Ch2_Ex2.py
-    Author: Matt Randazzo
-    Date created: 12/14/2018
+    File name:          CTCI_Ch2_Ex2.py
+    Author:             Matt Randazzo
+    Date created:       12/14/2018
     Date last modified: 12/20/2018
-    Python Version: 3.7
+    Python Version:     3.7
 
     Description: CTCI 2.2 Return Kth to Last
                  Implement an algorithm to find the kth to last element of a singly
