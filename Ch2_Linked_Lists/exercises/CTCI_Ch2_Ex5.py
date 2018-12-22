@@ -17,14 +17,36 @@
 
     Functions:
 
-        sum_linked_lists        Recursively sum linked list
-        sum_linked_list_reverse Sum linked list in reverse order
+        sum_linked_lists         Recursively sum linked list
+        sum_linked_lists_reverse Sum linked list in reverse order
 
 
 """
 from CTCI.Ch2_Linked_Lists.common.SinglyLinkedList import Node, SinglyLinkedList
 
+
 class SumSinglyLinkedList(SinglyLinkedList):
+
+    def nodes_to_int(self, reverse=True):
+        """Converts linked list number structure to number string
+           for testing purposes.
+
+        :returns Number string representing node structure
+
+        """
+        if self.is_empty():
+            return None
+
+        curr = self._head
+        num_str = str(curr._data)
+        while curr._next is not None:
+            curr = curr._next
+            num_str += str(curr._data)
+
+        if reverse:
+            num_str = num_str[::-1]
+
+        return num_str
 
     def sum_linked_lists(self, other):
         """Recursive solution to summing two linked lists using SinglyLinkedList class
@@ -34,18 +56,20 @@ class SumSinglyLinkedList(SinglyLinkedList):
 
         """
         if self.is_empty() and other.is_empty():
-            return
+            return None
 
         new = SumSinglyLinkedList()
 
         def sum_helper(node1, node2, carry=0):
-            """Sum helper function
+            """Sums and adds nodes to new linked list
 
-            :param   head of linked list
-            :param   head of other linked list
-            :param   defaulted to zero
+            :param   node1 head of linked list
+            :param   node2 head of other linked list
+            :param   carry defaulted to zero
 
-            :returns None"""
+            :returns None
+
+            """
             if node1 is None and node2 is None and carry == 0:
                 return
 
@@ -99,7 +123,32 @@ def sum_linked_lists(node1, node2, carry=0):
     return curr
 
 
-def sum_linked_list_reverse(node1, node2, carry=0):
+def sum_linked_lists_reverse(node1, node2, carry=0):
+    """Sum linked list in reverse order
+
+    e.g. 1->2->3 + 9->8->0 = 1->1->0->3
+
+    :param   node1 head of linked list
+    :param   node2 head of linked list
+    :param   carry defaulted to 0
+
+    :returns Sum of linked list in reverse order
+
+    """
+
+    def get_length(head):
+        """Find length of linked list
+
+        :param   head head of the linked list
+        :returns number of elements in the linked list
+
+        """
+        num = 0
+        curr = head
+        while curr is not None:
+            curr = curr.next
+            num += 1
+        return num
 
     def pad_zeroes(head, num):
         """Pad zeroes to the front of the linked list
@@ -118,20 +167,6 @@ def sum_linked_list_reverse(node1, node2, carry=0):
             num -= 1
         curr.next = head
         return new
-
-    def get_length(head):
-        """Find length of linked list
-
-        :param   head head of the linked list
-        :returns number of elements in the linked list
-
-        """
-        num = 0
-        curr = head
-        while curr is not None:
-            curr = curr.next
-            num += 1
-        return num
 
     def sum_helper(node1, node2):
         """Sum helper function to recursively sum elements of equal length linked lists
@@ -156,6 +191,9 @@ def sum_linked_list_reverse(node1, node2, carry=0):
 
         return next
 
+    if node1 is None and node2 is None:
+        return None
+
     len1 = get_length(node1)
     len2 = get_length(node2)
 
@@ -170,3 +208,25 @@ def sum_linked_list_reverse(node1, node2, carry=0):
         tmp = tmp.next
 
     return tmp
+
+
+def nodes_to_int(head, reverse=True):
+    """Converts linked list number structure to number string
+       for testing purposes.
+
+    :returns Number string representing node structure
+
+    """
+    if head is None:
+        return None
+
+    curr = head
+    num_str = str(curr.data)
+    while curr.next is not None:
+        curr = curr.next
+        num_str += str(curr.data)
+
+    if reverse:
+        num_str = num_str[::-1]
+
+    return num_str
