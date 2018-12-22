@@ -11,6 +11,17 @@ class Node:
         self.data = data
         self.next = None
 
+    def __str__(self):
+        """Print Linked List"""
+        if self.data is None:
+            return ""
+        curr = self
+        retstr = str(curr.data)
+        while curr.next is not None:
+            curr = curr.next
+            retstr += "->" + str(curr.data)
+        return retstr
+
 
 class SinglyLinkedList:
     """Singly Linked List ADT"""
