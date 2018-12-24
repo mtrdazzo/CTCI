@@ -26,7 +26,11 @@ from CTCI.Ch2_Linked_Lists.common.SinglyLinkedList import LinkedStack
 class PalindromeSinglyLinkedList(SinglyLinkedList):
 
     def is_palindrome(self):
-        """Return True if linked list is a palindrome"""
+        """Determine if linked list is a palindrome
+
+        :returns Boolean if linked list is a palindrome
+
+        """
 
         if self.is_empty():
             raise Empty("List is empty")
@@ -63,7 +67,12 @@ class PalindromeSinglyLinkedList(SinglyLinkedList):
 
 
 def is_palindrome_brute_force(head):
-    """Brute force method to test if linked list is a palindrome"""
+    """Brute force method to test if linked list is a palindrome
+
+    :param   head Head of the linked list
+    :returns Boolean if linked list is a palindrome
+
+    """
     if head is None:
         return
 
@@ -84,7 +93,13 @@ def is_palindrome_brute_force(head):
 
 
 def is_palindrome_reverse(head):
-    """Return if linked list is a palindrome by reversing the second half of the linked list"""
+    """Return if linked list is a palindrome by reversing the second half of the linked list
+
+    :param   head Head of the linked list
+
+    :returns Boolean if linked list is a palindrome
+
+    """
     if head is None:
         return
 
