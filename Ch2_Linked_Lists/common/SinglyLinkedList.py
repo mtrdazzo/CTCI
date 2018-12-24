@@ -2,6 +2,7 @@ class Empty(Exception):
     """Empty Linked list exception"""
     pass
 
+
 class Node:
     """Lightweight, public node class"""
     __slots__ = 'data', 'next'
@@ -21,6 +22,69 @@ class Node:
             curr = curr.next
             retstr += "->" + str(curr.data)
         return retstr
+
+
+class LinkedStack:
+    """LIFO Stack ADT using a singly linked list as storage"""
+
+    class _Node:
+        """Non-public lightweight node class"""
+        __slots__ = '_data', '_next'
+
+        def __init__(self, data, next=None):
+            """Instantiate a Node with data"""
+            self._data = data
+            self._next = next
+
+    def __init__(self):
+        """Instantiate an empty linked stack"""
+        self._head = None
+        self._size = 0
+
+    def __len__(self):
+        """Return the number of elements in the linked list"""
+        return self._size
+
+    def __str__(self):
+        """Print the linked stack"""
+        if self.is_empty():
+            return ""
+        curr = self._head
+        s = str(curr._data)
+        while curr._next is not None:
+            curr = curr._next
+            s = '->' + str(curr._data)
+        return s
+
+    def is_empty(self):
+        """Return True if there are zero elements in the linked stack"""
+        return self._size == 0
+
+    def push(self, e):
+        """Push an element e onto the top of the stack"""
+        new = self._Node(e, self._head)
+        self._head = new
+        self._size += 1
+
+    def pop(self):
+        """Pop an element off the top of the stack"""
+        if self.is_empty():
+            raise Empty("Stack is empty")
+
+        e = self._head._data
+        tmp = self._head
+        self._head = self._head._next
+
+        tmp._data = tmp._next = None
+        self._size -= 1
+
+        return e
+
+    def top(self):
+        """Return the top element on the stack"""
+        if self.is_empty():
+            raise Empty("Stack is empty")
+        return self._head._data
 
 
 class SinglyLinkedList:
@@ -93,6 +157,7 @@ class SinglyLinkedList:
             self._head = self._head._next
             tmp = curr._data
             curr._data = curr._next = None
+            self._size -= 1
             return tmp
         else:
             found = False
@@ -113,4 +178,4 @@ class SinglyLinkedList:
                 else:
                     prev = curr
                     curr = curr._next
-
+            self._size -= 1
