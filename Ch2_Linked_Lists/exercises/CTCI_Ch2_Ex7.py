@@ -70,19 +70,13 @@ def is_intersection(ll_a, ll_b):
         shorter = ll_b
         longer = ll_a
 
+    # Skip elements until lists are the same size
     diff = abs(size_a - size_b)
-
-    # Pad zeros
-    if diff > 0:
-        head = new = Node(0)
-
-        while diff - 1:
-            new.next = Node(0)
-            new = new.next
-            diff = diff - 1
-
-        new.next = shorter
-        shorter = head
+    new = longer
+    while diff:
+        new = new.next
+        diff -= 1
+    longer = new
 
     # Increment through both lists, find intersection
     while shorter is not None:
