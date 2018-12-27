@@ -123,3 +123,7 @@ class ThreeInOneStack:
 
         return self.data[index]
 
+class DynamicThreeInOne(ThreeInOneStack):
+    """Design a data structure where the stack sizes are not fixed"""
+    pass
+

@@ -1,14 +1,27 @@
-class Empty(Exception):
-    """Stack or Queue is empty"""
-    pass
+#!/usr/bin/env python
+"""
+    File name:          CTCI_Ch3_Ex2.py
+    Author:             Matt Randazzo
+    Date created:       12/27/2018
+    Date last modified: 12/27/2018
+    Python Version:     3.7
+
+    Description: CTCI 3.2 Stack Min
+                 How would you design a stack which, in addition to push and pop, has a function
+                 min which returns the minimum element? Push, pop, and min should all operate in
+                 O(1) time.
+    Classes:
+
+        MinStack Data Structure that has the function min to return the minimum element in O(1)
+                 time
+
+    Functions:
+
+"""
+from CTCI.Ch3_Stacks_and_Queues.common.common import Stack, Empty, Full
 
 
-class Full(Exception):
-    """Stack or Queue is full"""
-    pass
-
-
-class Stack:
+class MinStack(Stack):
     """LIFO implementation of a Stack using a list as data storage"""
     DEFAULT_SIZE = 20
 
@@ -16,6 +29,7 @@ class Stack:
         """Instantiate an empty stack"""
         self._data = [None] * self.DEFAULT_SIZE
         self._size = 0
+        self._min = [None] * self.DEFAULT_SIZE
 
     def __len__(self):
         """Return the number of elements in the stack"""
@@ -39,6 +53,11 @@ class Stack:
             raise Full("Stack is full!")
         self._data[self._size] = e
 
+        if self.is_empty():
+            self._min[self._size] = e
+        else:
+            self._min[self._size] = min(e, self._min[self._size - 1])
+
         self._size += 1
 
     def min(self):
@@ -49,6 +68,7 @@ class Stack:
         """
         if self.is_empty():
             return
+        return self._min[self._size - 1]
 
     def pop(self):
         """Pop the element off the top of the stack
@@ -61,7 +81,9 @@ class Stack:
         e = self._data[self._size-1]
 
         self._data[self._size-1] = None
+        self._min[self._size-1] = None
         self._size -= 1
+        self._min.pop()
 
         return e
 
