@@ -3,7 +3,7 @@
     File name:          CTCI_Ch2_Ex7.py
     Author:             Matt Randazzo
     Date created:       12/24/2018
-    Date last modified: 12/24/2018
+    Date last modified: 12/26/2018
     Python Version:     3.7
 
     Description: CTCI 2.7 Intersection
@@ -15,7 +15,11 @@
     Classes:
 
 
+        None
+
     Functions:
+
+        is_intersection Iteratively finds the intersection between two linked lists
 
 """
 from CTCI.Ch2_Linked_Lists.common.SinglyLinkedList import Node
