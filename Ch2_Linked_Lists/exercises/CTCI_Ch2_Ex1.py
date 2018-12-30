@@ -51,5 +51,9 @@ class RemoveDupsSinglyLinkedList(SinglyLinkedList):
 
             curr = curr._next
 
+    def remove_dups_hash_table(self):
+        """Remove duplicates from the singly linked list using a hash table"""
+        pass
+
 
 

@@ -66,7 +66,7 @@ class SetOfStacks:
         def peek(self):
             if self.is_empty():
                 raise Empty("Stack is empty")
-            return self._data[self._index]
+            return self._data[self._index - 1]
 
     DEFAULT_SIZE = 10
 
