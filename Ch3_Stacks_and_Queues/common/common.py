@@ -29,6 +29,10 @@ class Stack:
         """Return True if there are no elements in the stack"""
         return self._size == 0
 
+    def is_full(self):
+        """Return True if the stack is full"""
+        return len(self) == len(self._data)
+
     def push(self, e):
         """Push an element e to the top of the stack
 
