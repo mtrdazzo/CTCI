@@ -19,7 +19,7 @@
                  specific sub-stack.
     Classes:
 
-        SetOfStacks
+        SetOfStacks An data structure modeling multiple stack of plates
 
     Functions:
 

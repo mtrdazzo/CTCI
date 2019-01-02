@@ -66,7 +66,3 @@ class MyQueue:
         e = self._stack_old.peek()
 
         return e
-
-
-
-
