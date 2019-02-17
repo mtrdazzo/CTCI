@@ -28,6 +28,8 @@ def create_min_tree(arr):
 
     :param arr List of node keys
 
+    O(N * log N) since inserting each node takes log N time
+
     """
 
     def create_min_tree_helper(tree, array, min, max):
