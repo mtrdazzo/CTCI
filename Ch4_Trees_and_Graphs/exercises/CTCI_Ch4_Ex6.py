@@ -115,8 +115,8 @@ class TreeParent:
     def find_successor(self, k):
         """Find successor of node with key k
 
-        :param k node key
-        :return  successor node
+        :param  k node key
+        :return   successor node
 
         """
         search = self.find(k)
@@ -135,14 +135,3 @@ class TreeParent:
                 walk = parent
                 parent = parent.parent
             return parent
-
-
-if __name__ == '__main__':
-    T = TreeParent()
-
-    nodes = [5, 3, 10, 6, 7, 2, 4]
-    for node in nodes:
-        T.add(node)
-
-    T.print_with_level()
-    print(T.find_successor(4))
