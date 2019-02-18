@@ -1,7 +1,8 @@
 from collections import deque
 
-class Tree:
-    """Binary Tree Class"""
+
+class BinarySearchTree:
+    """Binary Search Tree Class"""
     class Node:
         """Lightweight Tree Node"""
         __slots__ = 'data', 'left', 'right', 'parent'
@@ -9,8 +10,8 @@ class Tree:
         def __init__(self, data, parent=None):
             """Tree node constructor
 
-            \param data   node key
-            \param parent parent node, (none) if root
+            :param data   node key
+            :param parent parent node, (none) if root
 
             """
             self.data = data
@@ -46,7 +47,7 @@ class Tree:
     def _find_last_position(self, root):
         """Find last position in root
 
-        \param root root of binary tree
+        :param root root of binary tree
 
         """
         if root is None:
@@ -59,7 +60,7 @@ class Tree:
     def _find_first_position(self, root):
         """Find first position in root
 
-        \param root root of binary tree
+        :param root root of binary tree
 
         """
         if root is None:
@@ -117,32 +118,11 @@ class Tree:
             self.delete(node.right, successor)
         self.num -= 1
 
-    def add_non_recursive(self, e):
-        if self.is_empty():
-            self.root = self.Node(e)
-        else:
-            curr = self.root
-            placed = False
-            while not placed:
-                if e <= curr.data:
-                    if curr.left is None:
-                        curr.left = self.Node(e, curr)
-                        placed = True
-                    else:
-                        curr = curr.left
-                else:
-                    if curr.right is None:
-                        curr.right = self.Node(e, curr)
-                        placed = True
-                    else:
-                        curr = curr.right
-        self.num += 1
-
     def search(self, root, key):
         """Search for key in Binary Tree
 
-        \param root Binary Tree root
-        \param key  Node key
+        :param root Binary Tree root
+        :param key  Node key
 
         """
         if root is None or root.data == key:
@@ -155,8 +135,8 @@ class Tree:
     def _add_helper(self, root, n):
         """Add node to Binary Tree helper function
 
-        \param root binary tree root
-        \param n    node key
+        :param root binary tree root
+        :param n    node key
 
         """
         if n > root.data:
@@ -177,7 +157,7 @@ class Tree:
     def add(self, n):
         """Add node to binary tree
 
-        \param n node key
+        :param n node key
 
         """
         if self.root is None:
@@ -188,6 +168,7 @@ class Tree:
             return self._add_helper(self.root, n)
 
     def print_right(self):
+        """Print right side of the binary tree"""
         if self.is_empty():
             return
         nodes = deque()
@@ -237,7 +218,7 @@ class Tree:
     def height(self):
         """Return height of Binary Tree
 
-        \return height of binary tree root
+        :return height of binary tree root
 
         """
         return self.get_height(self.root)
@@ -253,11 +234,9 @@ class Tree:
 
     def _height_helper(self, node):
         if node is None: # Is empty?
-            return 0
-        elif node.left is None and node.right is None: # Is node a leaf?
-            return 0
+            return -1
         else:
-            return max(self._height(node.left), self._height(node.right)) + 1
+            return max(self._height_helper(node.left), self._height_helper(node.right)) + 1
 
     def print_with_level(self):
         if self.is_empty():
@@ -352,7 +331,7 @@ class Tree:
     def _delete_tree_helper_preorder(self, root):
         """"Helper function to delete tree using preorder traversal
 
-        \param root binary tree root
+        :param root binary tree root
 
         """
         if root is None:
@@ -363,7 +342,7 @@ class Tree:
     def _delete_tree_helper_postorder(self, root):
         """Helper function to delete tree using postorder traversal
 
-        \param root binary tree root
+        :param root binary tree root
 
         """
         # Post order traversal delete
@@ -391,26 +370,23 @@ class Tree:
             nodes.append(curr.right) if curr.right is not None else None
         return node_str
 
+    def pre_order(self):
+        """Pre-order Binary Tree traversal"""
+        if self.root is not None:
+            print(self.root.key)
+            pre_order(self.root.left)
+            pre_order(self.root.right)
 
-def pre_order(root):
-    """Pre-order Binary Tree traversal"""
-    if root is not None:
-        print(root.key)
-        pre_order(root.left)
-        pre_order(root.right)
+    def post_order(self):
+        """Post-order Binary Tree traversal"""
+        if self.root is not None:
+            post_order(self.root.left)
+            post_order(self.root.right)
+            print(self.root.key)
 
-
-def post_order(root):
-    """Post-order Binary Tree traversal"""
-    if root is not None:
-        post_order(root.left)
-        post_order(root.right)
-        print(root.key)
-
-
-def in_order(root):
-    """In-order Binary Tree traversal"""
-    if root is not None:
-        in_order(root.left)
-        print(root.key)
-        in_order(root.right)
+    def in_order(self):
+        """In-order Binary Tree traversal"""
+        if self.root is not None:
+            in_order(self.root.left)
+            print(self.root.key)
+            in_order(self.root.right)

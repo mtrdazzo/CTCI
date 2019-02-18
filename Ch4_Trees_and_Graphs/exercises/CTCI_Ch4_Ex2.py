@@ -21,7 +21,7 @@
             create_min_tree_helper
 
 """
-from CTCI.Ch4_Trees_and_Graphs.common.BinaryTree import Tree
+from CTCI.Ch4_Trees_and_Graphs.common.BinaryTree import BinarySearchTree
 
 
 def create_min_tree(arr):
@@ -56,7 +56,7 @@ def create_min_tree(arr):
     if arr is None:
         return
 
-    min_tree = Tree()
+    min_tree = BinarySearchTree()
     create_min_tree_helper(min_tree, arr, 0, len(min_tree) - 1)
 
     return min_tree

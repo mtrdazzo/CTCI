@@ -1,12 +1,12 @@
 from unittest import TestCase
-from CTCI.Ch4_Trees_and_Graphs.common.BinaryTree import Tree
+from CTCI.Ch4_Trees_and_Graphs.common.BinaryTree import BinarySearchTree
 from CTCI.Ch4_Trees_and_Graphs.exercises.CTCI_Ch4_Ex3 import list_of_depths
 
 
 class TestLinkedListLevel(TestCase):
     def setUp(self):
         self.linked_lists = []
-        self.tree = Tree()
+        self.tree = BinarySearchTree()
 
     def tearDown(self):
         pass
