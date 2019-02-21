@@ -1,6 +1,102 @@
 from collections import deque
 
 
+class BinaryTree:
+    """Binary Tree Data Structure"""
+
+    class Node:
+        """Lightweight Node class"""
+
+        __slots__ = 'data', 'left', 'right'
+
+        def __init__(self, data):
+            """Instantiate a Node with reference to data"""
+            self.data = data
+            self.right = None
+            self.left = None
+
+        def __str__(self):
+            """Print Node data"""
+            return str(self.data)
+
+    def __init__(self):
+        """Instantiate an empty Binary Tree with no nodes"""
+        self.root = None
+        self._n = 0
+
+    def __len__(self):
+        """Return the number of nodes in the binary tree"""
+        return self._n
+
+    def is_empty(self):
+        """Return True if the binary tree is empty"""
+        return self._n == 0
+
+    def add(self, k):
+        """Add node to the Binary Tree
+
+        :param k node key
+        :return  added node
+
+        """
+        # If binary tree is empty
+        if self.is_empty():
+            self.root = self.Node(k)
+            self._n += 1
+            return self.root
+
+        q = deque()
+        q.append(self.root)
+
+        while len(q) > 0:
+            current = q.popleft()
+
+            if current.left is None:
+                current.left = self.Node(k)
+                self._n += 1
+                return current.left
+            else:
+                q.append(current.left)
+            if current.right is None:
+                current.right = self.Node(k)
+                self._n += 1
+                return current.right
+            else:
+                q.append(current.right)
+
+    def __str__(self):
+        """Print Binary Tree with levels"""
+        if self.is_empty():
+            return ""
+        retstr = ""
+
+        q = deque()
+        q.append(self.root)
+        q.append(None)
+        prev = None
+
+        while len(q) > 0:
+
+            current = q.popleft()
+
+            if current is None:
+                retstr += '\n'
+                if prev is None:
+                    break
+                else:
+                    q.append(None)
+
+            else:
+                retstr += str(current) + " "
+
+                q.append(current.left) if current.left is not None else None
+                q.append(current.right) if current.right is not None else None
+
+            prev = current
+
+        return retstr
+
+
 class BinarySearchTree:
     """Binary Search Tree Class"""
     class Node:
@@ -17,7 +113,7 @@ class BinarySearchTree:
             self.data = data
             self.left = None
             self.right = None
-            self.parent =parent
+            self.parent = parent
 
         def __str__(self):
             """String representation of node"""
